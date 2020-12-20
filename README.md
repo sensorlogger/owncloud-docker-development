@@ -13,3 +13,4 @@ Created and tested for use with Ubuntu 18.04. But should work on any system supp
 1. composer install
 1. composer docker-up
 1. sudo chown -Rf [USER]:[GROUP] vendor/
+1. Login to http://localhost:8080/ as admin:admin
