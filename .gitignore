@@ -1,0 +1,5 @@
+.env
+composer.lock
+sensorlogger
+vendor/
+sensorlogger/
