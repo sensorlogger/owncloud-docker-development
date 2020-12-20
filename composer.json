@@ -3,7 +3,7 @@
    "description":"SensorLogger Development Environment",
    "version":"1.0.0",
    "type":"project",
-   "license":"MIT",
+   "license":"GNU GPLv3",
    "repositories":[
       {
          "type":"vcs",
