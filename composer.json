@@ -56,9 +56,9 @@
       ],
       "docker-wipeout":[
          "@docker-stop",
-         "docker rm docker_db_1",
-         "docker rm docker_owncloud_1",
-         "docker rm docker_redis_1"
+         "docker rm owncloud-docker-development_db_1",
+         "docker rm owncloud-docker-development_owncloud_1",
+         "docker rm owncloud-docker-development_redis_1"
       ]
    }
 }
