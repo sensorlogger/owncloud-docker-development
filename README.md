@@ -1,6 +1,17 @@
-## SensorLogger for OwnCloud Development
+## SensorLogger for owncloud Development
+
+Simple owncloud docker environment. Ready to test and develop SensorLogger for owncloud.
+Created and tested for use with Ubuntu 18.04. But should work on any system supporting composer and docker.
+
+### Requirements
+* composer
+   * https://wiki.ubuntuusers.de/Composer/
+   * https://getcomposer.org/download/ 
+* docker-compose
+   * sudo apt-get install docker-compose
 
 ### Install
+
 1. your@machine:$ `git clone https://github.com/alexstocker/owncloud-docker-development.git`
 2. your@machine:$ `cd owncloud-docker-development`
 3. your@machine:...owncloud-docker-development$ `composer install`
@@ -23,6 +34,3 @@ Now you have a fake sensor device named `Default device`.
 * to view data got to `SensorLogger->List`
 * to add dashboard widget got to `SensorLogger->Dashboard`
   > more about `Dashboard Widgets` please read the docs https://github.com/alexstocker/sensorlogger/wiki/Users
-
-
-
