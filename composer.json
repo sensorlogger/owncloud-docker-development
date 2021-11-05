@@ -1,7 +1,7 @@
 {
    "name":"sensorlogger/development-env",
    "description":"SensorLogger Development Environment",
-   "version":"1.0.0",
+   "version":"1.0.1",
    "type":"project",
    "license":"GNU GPLv3",
    "repositories":[
@@ -38,15 +38,19 @@
 	    "ln -s vendor/alexstocker/sensorlogger sensorlogger"
 	],
       "cleanup":[
-         "rm -fv tmp/logs/*"
+         "rm -fv tmp/logs/*",
+         "rm sensorlogger",
+         "rm .env"
       ],
       "add-env-files":[
          "if [ ! -e \".env\" ]; then cp -v .env.default .env; fi"
       ],
       "docker-up":[
          "@add-env-files",
-	"@link-sensorlogger",
-         "docker-compose up -d --force-recreate --remove-orphans"
+	     "@link-sensorlogger",
+         "docker-compose up -d --force-recreate --remove-orphans",
+         "docker exec -tu www-data:root owncloud_server bash -c 'rm -f /var/www/owncloud/config/overwrite.config.php'",
+         "docker cp overwrite.config.php.dist owncloud_server:/var/www/owncloud/config/overwrite.config.php"
       ],
       "docker-start":[
          "docker-compose start"
@@ -56,9 +60,10 @@
       ],
       "docker-wipeout":[
          "@docker-stop",
-         "docker rm owncloud-docker-development_db_1",
-         "docker rm owncloud-docker-development_owncloud_1",
-         "docker rm owncloud-docker-development_redis_1"
+         "docker rm owncloud_server",
+         "docker rm owncloud_redis",
+         "docker rm owncloud_mariadb",
+         "@cleanup"
       ]
    }
 }
