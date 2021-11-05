@@ -11,8 +11,8 @@
 ### Setup a device
 1. Got to Settings->Security
 2. Create a new App `password/passcode`
-3. Edit sensorlogger/test/curl/post.php using an editor or of your choice (vi, mc, pico, gedit, notepad, phpstorm, netbeans, eclipse)
-4. Modify `$token` variable by the `passcode` you created two steps earlier
+3. Edit `sensorlogger/test/curl/post.php` using an editor or of your choice (vi, mc, pico, gedit, notepad, phpstorm, netbeans, eclipse)
+4. Modify `$token` variable. Replace the existing string by the `passcode` you created two steps earlier
 5. your@machine:...owncloud-docker-development$ `php ./sensorlogger/tests/curl/post.php`
    > Result/Response `{"success":true,"message":"Sensor Log successfully stored","data":null}`
    > more about the `API` please read the docs https://github.com/alexstocker/sensorlogger/wiki/API
