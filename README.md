@@ -26,12 +26,7 @@ your@machine:...owncloud-docker-development$ `composer docker-up`
 #### Stop docker containers
 your@machine:...owncloud-docker-development$ `composer docker-stop`
 
-#### Start docker containers 
-
-> For instance: if host was rebooted
-> Do NOT use `docker start|stop owncloud_[server|redis|mariadb]`. 
-> for `restart` the containers. SensorLogger App will not be present if you do so.
-
+#### Start docker containers
 your@machine:...owncloud-docker-development$ `composer docker-start`
 
 ### Setup a device (simple)

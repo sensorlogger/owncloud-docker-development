@@ -53,9 +53,7 @@
          "docker cp overwrite.config.php.dist owncloud_server:/var/www/owncloud/config/overwrite.config.php"
       ],
       "docker-start":[
-         "docker-compose start",
-         "docker exec -tu www-data:root owncloud_server bash -c 'rm -f /var/www/owncloud/config/overwrite.config.php'",
-         "docker cp overwrite.config.php.dist owncloud_server:/var/www/owncloud/config/overwrite.config.php"
+         "docker-compose start"
       ],
       "docker-stop":[
          "docker-compose stop"
