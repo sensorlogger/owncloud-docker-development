@@ -1,7 +1,14 @@
-## SensorLogger for owncloud Development
+## Owncloud Docker Development Environment for custom web apps
 
-Simple owncloud docker environment. Ready to test and develop SensorLogger for owncloud.
+Simple owncloud docker environment. Ready to test and develop custom apps for owncloud.
 Created and tested for use with Ubuntu 18.04. But should work on any system supporting composer and docker.
+
+Currently supporting
+
+* SensorLogger
+* 3D File Viewer
+
+but with some tweaks suitable for others too.
 
 ### Requirements
 * composer
@@ -29,7 +36,15 @@ your@machine:...owncloud-docker-development$ `composer docker-stop`
 #### Start docker containers
 your@machine:...owncloud-docker-development$ `composer docker-start`
 
-### Setup a device (simple)
+#### Remove and wipe out docker containers
+your@machine:...owncloud-docker-development$ `composer docker-wipeout`
+
+#### Enable Custom Apps
+your@machine:...owncloud-docker-development$ `composer apps-enable`
+
+#### Additions for SensorLogger
+
+##### Setup a device (simple)
 1. Got to Settings->Security
 2. Create a new App `password/passcode`
 3. Edit `sensorlogger/test/curl/post.php` using an editor or of your choice (vi, mc, pico, gedit, notepad, phpstorm, netbeans, eclipse)
@@ -45,10 +60,10 @@ Now you have a fake sensor device named `Default device`.
 * to add dashboard widget got to `SensorLogger->Dashboard`
   > more about `Dashboard Widgets` please read the docs https://github.com/alexstocker/sensorlogger/wiki/Users
 
-#### Creating fake sensor data in a loop
+###### Creating fake sensor data in a loop
 `while [ 1 ]; do clear; php ./sensorlogger/tests/curl/post.php; sleep 5; done;`
 
-### Setup a device (extend)
+##### Setup a device (extend)
 1. Got to Settings->Security
 2. Create a new App `password/passcode`
 3. Edit `sensorlogger/test/curl/register_extend.php` using an editor or of your choice (vi, mc, pico, gedit, notepad, phpstorm, netbeans, eclipse)
@@ -63,7 +78,9 @@ Now you have a fake sensor device named `Default device`.
    > more about the `API` please read the docs https://github.com/alexstocker/sensorlogger/wiki/API
 9. Done
 
-#### Creating fake sensor data in a loop
+###### Creating fake sensor data in a loop
 `while [ 1 ]; do clear; php ./sensorlogger/tests/curl/post_extend.php; sleep 5; done;`
 
+#### Additions for 3D File Viewer
 
+* ... `comming soon`
