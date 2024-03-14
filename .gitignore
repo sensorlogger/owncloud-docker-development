@@ -2,4 +2,8 @@
 .env
 composer.lock
 sensorlogger
-vendor/
+_signing
+builder
+files_*
+vendor
+viewstl
