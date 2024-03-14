@@ -40,7 +40,8 @@ your@machine:...owncloud-docker-development$ `composer docker-start`
 your@machine:...owncloud-docker-development$ `composer docker-wipeout`
 
 #### Enable Custom Apps
-your@machine:...owncloud-docker-development$ `composer apps-enable`
+your@machine:...owncloud-docker-development$ `composer enable-apps`
+```
 
 #### Additions for SensorLogger
 
