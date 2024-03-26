@@ -52,6 +52,7 @@
       "@add-env-files",
       "@link-sensorlogger",
       "@link-3dviewer",
+      "docker-compose pull",
       "docker-compose up -d --force-recreate --remove-orphans"
     ],
     "docker-start": [
@@ -68,16 +69,16 @@
       "@cleanup"
     ],
     "xdebug-install": [
-      "docker exec -tu root owncloud_server bash -c 'apt-get update -y'",
-      "docker exec -tu root owncloud_server bash -c 'apt-get upgrade -y'",
-      "docker exec -tu root owncloud_server bash -c 'apt-get install -y mc iputils-ping php7.4-xdebug'",
-      "docker exec -tu root owncloud_server bash -c 'echo \"remote_enable=1\" >> /etc/php/7.4/apache2/conf.d/20-xdebug.ini && echo \"xdebug.remote_autostart=1\" >> /etc/php/7.4/apache2/conf.d/20-xdebug.ini && echo \"xdebug.remote_port=9003\" >> /etc/php/7.4/apache2/conf.d/20-xdebug.ini && echo \"xdebug.remote_host=127.0.0.1\" >> /etc/php/7.4/apache2/conf.d/20-xdebug.ini'"
+      "docker exec -tu root owncloud_server entrypoint bash -c 'apt-get update -y'",
+      "docker exec -tu root owncloud_server entrypoint bash -c 'apt-get upgrade -y'",
+      "docker exec -tu root owncloud_server entrypoint bash -c 'apt-get install -y mc iputils-ping php7.4-xdebug'",
+      "docker exec -tu root owncloud_server entrypoint bash -c 'echo \"remote_enable=1\" >> /etc/php/7.4/apache2/conf.d/20-xdebug.ini && echo \"xdebug.remote_autostart=1\" >> /etc/php/7.4/apache2/conf.d/20-xdebug.ini && echo \"xdebug.remote_port=9003\" >> /etc/php/7.4/apache2/conf.d/20-xdebug.ini && echo \"xdebug.remote_host=127.0.0.1\" >> /etc/php/7.4/apache2/conf.d/20-xdebug.ini'"
     ],
     "enable-apps": [
       "docker cp overwrite.config.php.dist owncloud_server:/mnt/data/config/overwrite.config.php",
-      "docker exec -tu root owncloud_server bash -c 'cat /mnt/data/config/overwrite.config.php'",
-      "docker exec -tu root owncloud_server bash -c 'runuser -u www-data ./occ app:enable sensorlogger'",
-      "docker exec -tu root owncloud_server bash -c 'runuser -u www-data ./occ app:enable files_3dviewer'"
+      "docker exec -tu root owncloud_server entrypoint bash -c 'cat /mnt/data/config/overwrite.config.php'",
+      "docker exec -tu root owncloud_server entrypoint bash -c 'runuser -u www-data ./occ app:enable sensorlogger'",
+      "docker exec -tu root owncloud_server entrypoint bash -c 'runuser -u www-data ./occ app:enable files_3dviewer'"
     ]
   }
 }
