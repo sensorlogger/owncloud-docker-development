@@ -1,69 +1,84 @@
 {
-   "name":"sensorlogger/development-env",
-   "description":"SensorLogger Development Environment",
-   "version":"1.0.1",
-   "type":"project",
-   "license":"GNU GPLv3",
-   "repositories":[
-      {
-         "type":"vcs",
-         "url":"https://github.com/alexstocker/sensorlogger.git"
-      }
-   ],
-   "require":{
-      "php":">=7.2",
-      "alexstocker/sensorlogger":"dev-0.1-devel"
-   },
-   "require-dev":{
-      
-   },
-   "minimum-stability":"dev",
-   "suggest":{
-      
-   },
-   "scripts":{
-      "post-install-cmd":[
-
-      ],
-      "post-update-cmd":[
-         
-      ],
-      "check":[
-         
-      ],
-      "cs-check":[
-         
-      ],
-	"link-sensorlogger": [
-	    "ln -s vendor/alexstocker/sensorlogger sensorlogger"
-	],
-      "cleanup":[
-         "rm -fv tmp/logs/*",
-         "rm sensorlogger",
-         "rm .env"
-      ],
-      "add-env-files":[
-         "if [ ! -e \".env\" ]; then cp -v .env.default .env; fi"
-      ],
-      "docker-up":[
-         "@add-env-files",
-	     "@link-sensorlogger",
-         "docker-compose up -d --force-recreate --remove-orphans",
-         "docker exec -tu www-data:root owncloud_server bash -c 'rm -f /var/www/owncloud/config/overwrite.config.php'",
-         "docker cp overwrite.config.php.dist owncloud_server:/var/www/owncloud/config/overwrite.config.php"
-      ],
-      "docker-start":[
-         "docker-compose start"
-      ],
-      "docker-stop":[
-         "docker-compose stop"
-      ],
-      "docker-wipeout":[
-         "@docker-stop",
-         "docker rm owncloud_server",
-         "docker rm owncloud_redis",
-         "docker rm owncloud_mariadb",
-         "@cleanup"
-      ]
-   }
+  "name": "alexstocker/owncloud-docker-development",
+  "description": "Owncloud docker development environment for custom web apps",
+  "type": "project",
+  "license": "GNU GPLv3",
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/alexstocker/sensorlogger.git"
+    },
+    {
+      "type": "vcs",
+      "url": "https://github.com/alexstocker/3dviewer-for-owncloud.git"
+    }
+  ],
+  "require": {
+    "php": ">=7.2 || >=7.4",
+    "alexstocker/sensorlogger": "dev-0.1-devel",
+    "alexstocker/3dviewer-for-owncloud": "dev-1.0-devel"
+  },
+  "require-dev": {
+  },
+  "minimum-stability": "dev",
+  "suggest": {
+  },
+  "scripts": {
+    "post-install-cmd": [
+    ],
+    "post-update-cmd": [
+    ],
+    "check": [
+    ],
+    "cs-check": [
+    ],
+    "link-sensorlogger": [
+      "if [ ! -e \"sensorlogger\" ]; then ln -s vendor/alexstocker/sensorlogger sensorlogger; fi"
+    ],
+    "link-3dviewer": [
+      "if [ ! -e \"files_3dviewer\" ]; then ln -s vendor/alexstocker/3dviewer-for-owncloud files_3dviewer; fi"
+    ],
+    "cleanup": [
+      "docker volume rm owncloud-docker-development_redis owncloud-docker-development_backup owncloud-docker-development_mysql --force",
+      "rm -fv tmp/logs/*",
+      "rm sensorlogger",
+      "rm files_3dviewer",
+      "rm .env"
+    ],
+    "add-env-files": [
+      "if [ ! -e \".env\" ]; then cp -v .env.default .env; fi"
+    ],
+    "docker-up": [
+      "@add-env-files",
+      "@link-sensorlogger",
+      "@link-3dviewer",
+      "docker-compose pull",
+      "docker-compose up -d --force-recreate --remove-orphans"
+    ],
+    "docker-start": [
+      "docker-compose start"
+    ],
+    "docker-stop": [
+      "docker-compose stop"
+    ],
+    "docker-wipeout": [
+      "@docker-stop",
+      "docker rm owncloud_server",
+      "docker rm owncloud_redis",
+      "docker rm owncloud_mariadb",
+      "@cleanup"
+    ],
+    "xdebug-install": [
+      "docker exec -tu root owncloud_server entrypoint bash -c 'apt-get update -y'",
+      "docker exec -tu root owncloud_server entrypoint bash -c 'apt-get upgrade -y'",
+      "docker exec -tu root owncloud_server entrypoint bash -c 'apt-get install -y mc iputils-ping php7.4-xdebug'",
+      "docker exec -tu root owncloud_server entrypoint bash -c 'echo \"remote_enable=1\" >> /etc/php/7.4/apache2/conf.d/20-xdebug.ini && echo \"xdebug.remote_autostart=1\" >> /etc/php/7.4/apache2/conf.d/20-xdebug.ini && echo \"xdebug.remote_port=9003\" >> /etc/php/7.4/apache2/conf.d/20-xdebug.ini && echo \"xdebug.remote_host=127.0.0.1\" >> /etc/php/7.4/apache2/conf.d/20-xdebug.ini'"
+    ],
+    "enable-apps": [
+      "docker cp overwrite.config.php.dist owncloud_server:/mnt/data/config/overwrite.config.php",
+      "docker exec -tu root owncloud_server entrypoint bash -c 'cat /mnt/data/config/overwrite.config.php'",
+      "docker exec -tu root owncloud_server entrypoint bash -c 'runuser -u www-data ./occ app:enable sensorlogger'",
+      "docker exec -tu root owncloud_server entrypoint bash -c 'runuser -u www-data ./occ app:enable files_3dviewer'"
+    ]
+  }
 }
