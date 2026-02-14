@@ -1,4 +1,4 @@
-version: '3.2'
+version: '3.7'
 
 volumes:
   files:
@@ -8,6 +8,10 @@ volumes:
   backup:
     driver: local
   redis:
+    driver: local
+  builder:
+    driver: local
+  signing:
     driver: local
 
 services:
@@ -22,6 +26,7 @@ services:
       - redis
     environment:
       - OWNCLOUD_DOMAIN=${OWNCLOUD_DOMAIN}
+      - OWNCLOUD_TRUSTED_DOMAINS=${OWNCLOUD_TRUSTED_DOMAINS}
       - OWNCLOUD_DB_TYPE=mysql
       - OWNCLOUD_DB_NAME=owncloud
       - OWNCLOUD_DB_USERNAME=owncloud
@@ -38,11 +43,16 @@ services:
       timeout: 10s
       retries: 5
     volumes:
-      - files:/mnt/data
+      - ./builder:/mnt/builder
+      - ./_signing:/mnt/_signing
       - ./sensorlogger:/var/www/owncloud/apps-external/sensorlogger
+      - ./files_3dviewer:/var/www/owncloud/apps-external/files_3dviewer
+      - ./domain_manager:/var/www/owncloud/apps-external/domain_manager
+    networks:
+      - default
 
   mariadb:
-    image: mariadb:10.5
+    image: mariadb:10.11
     container_name: owncloud_mariadb
     restart: always
     environment:
@@ -56,6 +66,8 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    ports:
+      - "3306:3306"
     volumes:
       - mysql:/var/lib/mysql
       - backup:/var/lib/backup

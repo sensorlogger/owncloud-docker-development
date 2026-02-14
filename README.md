@@ -1,7 +1,15 @@
-## SensorLogger for owncloud Development
+## Owncloud Docker Development Environment for custom web apps
 
-Simple owncloud docker environment. Ready to test and develop SensorLogger for owncloud.
+Simple owncloud docker environment. Ready to test and develop custom apps for owncloud.
 Created and tested for use with Ubuntu 18.04. But should work on any system supporting composer and docker.
+
+Currently supporting
+
+* SensorLogger
+* 3D File Viewer
+* Domain Manager
+
+but with some tweaks suitable for others too.
 
 ### Requirements
 * composer
@@ -13,7 +21,7 @@ Created and tested for use with Ubuntu 18.04. But should work on any system supp
 ### Install
 1. your@machine:$ `git clone https://github.com/alexstocker/owncloud-docker-development.git`
 2. your@machine:$ `cd owncloud-docker-development`
-3. your@machine:...owncloud-docker-development$ `composer install`
+3. your@machine:...owncloud-docker-development$ `composer install --prefer-source` (--ignore-platform-reqs may be required if your local php version is not outdated ;-) 
 4. your@machine:...owncloud-docker-development$ `composer docker-up`
 5. your@machine:...owncloud-docker-development$ `sudo chown -Rf [USER]:[GROUP] vendor/` (adjust [USER] and [GROUP] to fit your needs)
 6. open browser goto http://localhost:8080/ (have a look at .env for username and password) and login
@@ -29,7 +37,16 @@ your@machine:...owncloud-docker-development$ `composer docker-stop`
 #### Start docker containers
 your@machine:...owncloud-docker-development$ `composer docker-start`
 
-### Setup a device (simple)
+#### Remove and wipe out docker containers
+your@machine:...owncloud-docker-development$ `composer docker-wipeout`
+
+#### Enable Custom Apps
+your@machine:...owncloud-docker-development$ `composer enable-apps`
+```
+
+#### Additions for SensorLogger
+
+##### Setup a device (simple)
 1. Got to Settings->Security
 2. Create a new App `password/passcode`
 3. Edit `sensorlogger/test/curl/post.php` using an editor or of your choice (vi, mc, pico, gedit, notepad, phpstorm, netbeans, eclipse)
@@ -45,10 +62,10 @@ Now you have a fake sensor device named `Default device`.
 * to add dashboard widget got to `SensorLogger->Dashboard`
   > more about `Dashboard Widgets` please read the docs https://github.com/alexstocker/sensorlogger/wiki/Users
 
-#### Creating fake sensor data in a loop
+###### Creating fake sensor data in a loop
 `while [ 1 ]; do clear; php ./sensorlogger/tests/curl/post.php; sleep 5; done;`
 
-### Setup a device (extend)
+##### Setup a device (extend)
 1. Got to Settings->Security
 2. Create a new App `password/passcode`
 3. Edit `sensorlogger/test/curl/register_extend.php` using an editor or of your choice (vi, mc, pico, gedit, notepad, phpstorm, netbeans, eclipse)
@@ -63,7 +80,9 @@ Now you have a fake sensor device named `Default device`.
    > more about the `API` please read the docs https://github.com/alexstocker/sensorlogger/wiki/API
 9. Done
 
-#### Creating fake sensor data in a loop
+###### Creating fake sensor data in a loop
 `while [ 1 ]; do clear; php ./sensorlogger/tests/curl/post_extend.php; sleep 5; done;`
 
+#### Additions for 3D File Viewer
 
+* ... `comming soon`

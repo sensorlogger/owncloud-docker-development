@@ -16,7 +16,7 @@ function getConfigFromEnv() {
             2 => [
                 "path" => OC::$SERVERROOT . "/apps-external",
                 "url" => "/apps-external",
-                "wirteable" => true
+                "writable" => true
             ]
         ],
     ];
