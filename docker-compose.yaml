@@ -1,4 +1,4 @@
-version: '3.7'
+version: '3.8'
 
 volumes:
   files:
@@ -48,6 +48,7 @@ services:
       - ./sensorlogger:/var/www/owncloud/apps-external/sensorlogger
       - ./files_3dviewer:/var/www/owncloud/apps-external/files_3dviewer
       - ./domain_manager:/var/www/owncloud/apps-external/domain_manager
+      - ./contacts:/var/www/owncloud/apps/contacts
     networks:
       - default
 

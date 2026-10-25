@@ -15,15 +15,18 @@
     {
       "type": "vcs",
       "url": "https://github.com/alexstocker/domain-manager-for-owncloud.git"
+    },
+    {
+      "type": "vcs",
+      "url": "https://github.com/alexstocker/owncloud-contacts.git"
     }
   ],
   "require": {
-    "php": ">=7.2 || >=7.4",
+    "php": ">=7.2 || >=7.4 || >=8.0 || >=8.1 || >=8.2 || >=8.3",
     "alexstocker/sensorlogger": "dev-0.1-devel",
     "alexstocker/3dviewer-for-owncloud": "dev-1.0-devel",
-    "alexstocker/domain-manager-for-owncloud": "dev-0.1-devel"
-  },
-  "require-dev": {
+    "alexstocker/domain-manager-for-owncloud": "dev-0.1-devel",
+    "owncloud/contacts": "dev-master"
   },
   "minimum-stability": "dev",
   "suggest": {
@@ -46,12 +49,16 @@
     "link-domainmanager": [
       "if [ ! -e \"domain_manager\" ]; then ln -s vendor/alexstocker/domain-manager-for-owncloud domain_manager; fi"
     ],
+    "link-contacts": [
+      "if [ ! -e \"contacts\" ]; then ln -s vendor/owncloud/contacts contacts; fi"
+    ],
     "cleanup": [
       "docker volume rm owncloud-docker-development_redis owncloud-docker-development_backup owncloud-docker-development_mysql --force",
       "rm -fv tmp/logs/*",
       "rm sensorlogger",
       "rm files_3dviewer",
       "rm domain_manager",
+      "rm contacts",
       "rm .env"
     ],
     "add-env-files": [
@@ -62,6 +69,7 @@
       "@link-sensorlogger",
       "@link-3dviewer",
       "@link-domainmanager",
+      "@link-contacts",
       "docker-compose pull",
       "docker-compose up -d --force-recreate --remove-orphans"
     ],
@@ -81,15 +89,25 @@
     "xdebug-install": [
       "docker exec -tu root owncloud_server entrypoint bash -c 'apt-get update -y'",
       "docker exec -tu root owncloud_server entrypoint bash -c 'apt-get upgrade -y'",
-      "docker exec -tu root owncloud_server entrypoint bash -c 'apt-get install -y mc iputils-ping php7.4-xdebug'",
-      "docker exec -tu root owncloud_server entrypoint bash -c 'echo \"xdebug.remote_enable=1\" >> /etc/php/7.4/apache2/conf.d/20-xdebug.ini && echo \"xdebug.remote_autostart=1\" >> /etc/php/7.4/apache2/conf.d/20-xdebug.ini && echo \"xdebug.remote_port=9003\" >> /etc/php/7.4/apache2/conf.d/20-xdebug.ini && echo \"xdebug.remote_connect_back=1\" >> /etc/php/7.4/apache2/conf.d/20-xdebug.ini'"
+      "docker exec -tu root owncloud_server entrypoint bash -c 'apt-get install -y mc iputils-ping php8.3-xdebug'",
+      "docker exec -tu root owncloud_server entrypoint bash -c 'echo \"xdebug.remote_enable=1\" >> /etc/php/8.3/apache2/conf.d/20-xdebug.ini && echo \"xdebug.remote_autostart=1\" >> /etc/php/8.3/apache2/conf.d/20-xdebug.ini && echo \"xdebug.remote_port=9003\" >> /etc/php/8.3/apache2/conf.d/20-xdebug.ini && echo \"xdebug.remote_connect_back=1\" >> /etc/php/8.3/apache2/conf.d/20-xdebug.ini'"
     ],
     "enable-apps": [
       "docker cp overwrite.config.php.dist owncloud_server:/mnt/data/config/overwrite.config.php",
       "docker exec -tu root owncloud_server entrypoint bash -c 'cat /mnt/data/config/overwrite.config.php'",
       "docker exec -tu root owncloud_server entrypoint bash -c 'runuser -u www-data ./occ app:enable sensorlogger'",
       "docker exec -tu root owncloud_server entrypoint bash -c 'runuser -u www-data ./occ app:enable files_3dviewer'",
-      "docker exec -tu root owncloud_server entrypoint bash -c 'runuser -u www-data ./occ app:enable domain_manager'"
+      "docker exec -tu root owncloud_server entrypoint bash -c 'runuser -u www-data ./occ app:enable domain_manager'",
+      "docker exec -tu root owncloud_server entrypoint bash -c 'runuser -u www-data ./occ app:enable contacts'"
     ]
+  },
+  "require-dev": {
+    "squizlabs/php_codesniffer": "4.x-dev",
+    "phpcompatibility/php-compatibility": "^10.0@dev"
+  },
+  "config": {
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    }
   }
 }
