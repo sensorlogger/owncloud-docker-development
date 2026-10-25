@@ -1,17 +1,28 @@
 ## Owncloud Docker Development Environment for custom web apps
 
 Simple owncloud docker environment. Ready to test and develop custom apps for owncloud.
-Created and tested for use with Ubuntu 18.04. But should work on any system supporting composer and docker.
+Created and tested for use with Ubuntu 26.04. But should work on any system supporting composer and docker.
 
-Currently supporting
+* Owncloud Classic 11 - [1.1-devel](https://github.com/alexstocker/owncloud-docker-development/tree/1.1-devel) and [main](https://github.com/alexstocker/owncloud-docker-development/tree/main)
+* Owncloud Classic 10 - [1.0-devel](https://github.com/alexstocker/owncloud-docker-development/tree/1.0-devel)
 
-* SensorLogger
-* 3D File Viewer
+Currently in Progress and testing with Owncloud Classic 11 (PHP 8.x compatible) and Owncloud 10.13.4 (PHP 7.4 compatible).
 
-but with some tweaks suitable for others too.
+* **INPROGRESS** [SensorLogger](https://marketplace.owncloud.com/apps/sensorlogger/) for Owncloud Classic 11 (PHP 8.x compatible)
+* **INPROGRESS** [3D File Viewer](https://marketplace.owncloud.com/apps/files_3dviewer/) for Owncloud Classic 11 (PHP 8.x compatible)
+* **INPROGRESS** [Domain Manager](https://github.com/alexstocker/domain-manager-for-owncloud/tree/0.1-devel) for Owncloud Classic 11 (PHP 8.x compatible)
+
+Others
+* **INPROGRESS**[Contacts](https://github.com/owncloud/contacts) for Owncloud Classic 11 (PHP 8.x compatible)
+* PENDING [Calendar](https://github.com/owncloud/calendar/) for Owncloud Classic 11 (PHP 8.x compatible)
+* PENDING [Passman](https://github.com/nextcloud/passman) for Owncloud Classic 11 (PHP 8.x compatible)
+* PENDING [Tasks](https://github.com/owncloud/tasks) for Owncloud Classic 11 (PHP 8.x compatible)
+* PENDING [Rainloop](https://www.rainloop.net/) for Owncloud Classic 11 (PHP 8.x compatible)
+
+* but with some tweaks suitable for others too.
 
 ### Requirements
-* composer
+* composer (and PHP installed on your machine)
    * https://wiki.ubuntuusers.de/Composer/
    * https://getcomposer.org/download/ 
 * docker-compose
@@ -20,7 +31,7 @@ but with some tweaks suitable for others too.
 ### Install
 1. your@machine:$ `git clone https://github.com/alexstocker/owncloud-docker-development.git`
 2. your@machine:$ `cd owncloud-docker-development`
-3. your@machine:...owncloud-docker-development$ `composer install`
+3. your@machine:...owncloud-docker-development$ `composer install --prefer-source` (--ignore-platform-reqs may be required if your local php version is not outdated ;-) 
 4. your@machine:...owncloud-docker-development$ `composer docker-up`
 5. your@machine:...owncloud-docker-development$ `sudo chown -Rf [USER]:[GROUP] vendor/` (adjust [USER] and [GROUP] to fit your needs)
 6. open browser goto http://localhost:8080/ (have a look at .env for username and password) and login
@@ -34,7 +45,7 @@ your@machine:...owncloud-docker-development$ `composer docker-up`
 your@machine:...owncloud-docker-development$ `composer docker-stop`
 
 #### Start docker containers
-your@machine:...owncloud-docker-development$ `composer docker-start`
+your@machine:...owncloud-docker-development$ `composer docker-start`,
 
 #### Remove and wipe out docker containers
 your@machine:...owncloud-docker-development$ `composer docker-wipeout`

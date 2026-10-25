@@ -1,6 +1,13 @@
 ## Owncloud Docker Development Environment for custom apps
 
+### 1.1.0 (UNRELEASED)
+* [NOREF] ADDED Contacts for PHP 8 compatibility verification
+* [NOREF] UPDATE to Owncloud 11
+
 ### 1.0.1 (UNRELEASED)
+* [NOREF] IMPROVED xdebug install script
+* [NOREF] FIXED Missing entrypoint on docker exec to get set env vars
+* [NOREF] ADDED Domain Manager for owncloud support
 * [NOREF] ADDED builer and _signing volumes for app signing purpose
 * [NOREF] ADDED `composer enable-apps`
 * [NOREF] UPDATED to Owncloud 10.13.4

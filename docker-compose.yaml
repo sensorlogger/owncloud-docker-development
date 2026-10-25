@@ -1,4 +1,4 @@
-version: '3.7'
+version: '3.8'
 
 volumes:
   files:
@@ -26,6 +26,7 @@ services:
       - redis
     environment:
       - OWNCLOUD_DOMAIN=${OWNCLOUD_DOMAIN}
+      - OWNCLOUD_TRUSTED_DOMAINS=${OWNCLOUD_TRUSTED_DOMAINS}
       - OWNCLOUD_DB_TYPE=mysql
       - OWNCLOUD_DB_NAME=owncloud
       - OWNCLOUD_DB_USERNAME=owncloud
@@ -46,6 +47,8 @@ services:
       - ./_signing:/mnt/_signing
       - ./sensorlogger:/var/www/owncloud/apps-external/sensorlogger
       - ./files_3dviewer:/var/www/owncloud/apps-external/files_3dviewer
+      - ./domain_manager:/var/www/owncloud/apps-external/domain_manager
+      - ./contacts:/var/www/owncloud/apps/contacts
     networks:
       - default
 
@@ -64,6 +67,8 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    ports:
+      - "3306:3306"
     volumes:
       - mysql:/var/lib/mysql
       - backup:/var/lib/backup

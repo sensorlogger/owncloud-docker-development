@@ -6,4 +6,5 @@ _signing
 builder
 files_*
 vendor
-viewstl
+domain_manager
+contacts
