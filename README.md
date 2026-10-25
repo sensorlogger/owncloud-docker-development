@@ -3,6 +3,9 @@
 Simple owncloud docker environment. Ready to test and develop custom apps for owncloud.
 Created and tested for use with Ubuntu 26.04. But should work on any system supporting composer and docker.
 
+* Owncloud Classic 11 - [1.1-devel](https://github.com/alexstocker/owncloud-docker-development/tree/1.1-devel) and [main](https://github.com/alexstocker/owncloud-docker-development/tree/main)
+* Owncloud Classic 10 - [1.0-devel](https://github.com/alexstocker/owncloud-docker-development/tree/1.0-devel)
+
 Currently in Progress and testing with Owncloud Classic 11 (PHP 8.x compatible) and Owncloud 10.13.4 (PHP 7.4 compatible).
 
 * **INPROGRESS** [SensorLogger](https://marketplace.owncloud.com/apps/sensorlogger/) for Owncloud Classic 11 (PHP 8.x compatible)
