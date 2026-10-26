@@ -19,6 +19,10 @@
     {
       "type": "vcs",
       "url": "https://github.com/alexstocker/owncloud-contacts.git"
+    },
+    {
+      "type": "vcs",
+      "url": "https://github.com/alexstocker/owncloud-calendar.git"
     }
   ],
   "require": {
@@ -26,7 +30,8 @@
     "alexstocker/sensorlogger": "dev-0.1-devel",
     "alexstocker/3dviewer-for-owncloud": "dev-1.0-devel",
     "alexstocker/domain-manager-for-owncloud": "dev-0.1-devel",
-    "owncloud/contacts": "dev-master"
+    "owncloud/contacts": "dev-master",
+    "owncloud/calendar": "dev-master"
   },
   "minimum-stability": "dev",
   "suggest": {
@@ -52,6 +57,9 @@
     "link-contacts": [
       "if [ ! -e \"contacts\" ]; then ln -s vendor/owncloud/contacts contacts; fi"
     ],
+    "link-calendar": [
+      "if [ ! -e \"calendar\" ]; then ln -s vendor/owncloud/calendar calendar; fi"
+    ],
     "cleanup": [
       "docker volume rm owncloud-docker-development_redis owncloud-docker-development_backup owncloud-docker-development_mysql --force",
       "rm -fv tmp/logs/*",
@@ -59,6 +67,7 @@
       "rm files_3dviewer",
       "rm domain_manager",
       "rm contacts",
+      "rm calendar",
       "rm .env"
     ],
     "add-env-files": [
@@ -70,6 +79,7 @@
       "@link-3dviewer",
       "@link-domainmanager",
       "@link-contacts",
+      "@link-calendar",
       "docker-compose pull",
       "docker-compose up -d --force-recreate --remove-orphans"
     ],
@@ -98,7 +108,11 @@
       "docker exec -tu root owncloud_server entrypoint bash -c 'runuser -u www-data ./occ app:enable sensorlogger'",
       "docker exec -tu root owncloud_server entrypoint bash -c 'runuser -u www-data ./occ app:enable files_3dviewer'",
       "docker exec -tu root owncloud_server entrypoint bash -c 'runuser -u www-data ./occ app:enable domain_manager'",
-      "docker exec -tu root owncloud_server entrypoint bash -c 'runuser -u www-data ./occ app:enable contacts'"
+      "docker exec -tu root owncloud_server entrypoint bash -c 'runuser -u www-data ./occ app:enable contacts'",
+      "docker exec -tu root owncloud_server entrypoint bash -c 'runuser -u www-data ./occ app:enable calendar'",
+      "docker exec -tu root owncloud_server entrypoint bash -c 'runuser -u www-data ./occ app:enable rainloop'",
+      "docker exec -tu root owncloud_server entrypoint bash -c 'runuser -u www-data ./occ app:enable passman'",
+      "docker exec -tu root owncloud_server entrypoint bash -c 'runuser -u www-data ./occ app:enable tasks'"
     ]
   },
   "require-dev": {

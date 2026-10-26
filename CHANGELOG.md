@@ -1,6 +1,10 @@
 ## Owncloud Docker Development Environment for custom apps
 
 ### 1.1.0 (UNRELEASED)
+* [NOREF] ADDED rainloop for PHP 8 compatibility verification
+* [NOREF] ADDED tasks for PHP 8 compatibility verification
+* [NOREF] ADDED passman for PHP 8 compatibility verification
+* [NOREF] ADDED Calendar for PHP 8 compatibility verification
 * [NOREF] ADDED Contacts for PHP 8 compatibility verification
 * [NOREF] UPDATE to Owncloud 11
 
