@@ -12,7 +12,7 @@ Currently in Progress and testing with Owncloud Classic 11 (PHP 8.x compatible) 
 * **INPROGRESS** [3D File Viewer](https://marketplace.owncloud.com/apps/files_3dviewer/) for Owncloud Classic 11 (PHP 8.x compatible)
 * **INPROGRESS** [Domain Manager](https://github.com/alexstocker/domain-manager-for-owncloud/tree/0.1-devel) for Owncloud Classic 11 (PHP 8.x compatible)
 
-Others
+Others [Compatibility Checks](docs/owncloud-11-apps-compatibility.md)
 * **INPROGRESS**[Contacts](https://github.com/owncloud/contacts) for Owncloud Classic 11 (PHP 8.x compatible)
 * PENDING [Calendar](https://github.com/owncloud/calendar/) for Owncloud Classic 11 (PHP 8.x compatible)
 * PENDING [Passman](https://github.com/nextcloud/passman) for Owncloud Classic 11 (PHP 8.x compatible)
