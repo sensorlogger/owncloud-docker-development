@@ -8,3 +8,7 @@ files_*
 vendor
 domain_manager
 contacts
+calendar
+tasks
+rainloop
+passman
